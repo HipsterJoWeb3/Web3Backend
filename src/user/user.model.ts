@@ -5,7 +5,7 @@ import {Roles} from "../roles/roles.model";
 
 export type UserDocument = User & Document;
 
-@Schema({ collection: 'users' })
+@Schema({ collection: 'users', timestamps: true })
 export class User {
     @Prop({ required: true, unique: true, type: String })
     username: string;
@@ -16,14 +16,16 @@ export class User {
     @Prop({ type: String })
     imageUrl: string;
 
-    @Prop({  type: String })
-    ban: string;
+    @Prop({  type: Boolean, default: false })
+    ban: boolean;
 
-    @Prop({ type: String })
+    @Prop({ type: String, default: '' })
     banReason: string;
 
     @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'roles'})
     roles: Roles[];
+
+
 
 
 }

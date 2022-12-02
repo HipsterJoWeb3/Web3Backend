@@ -9,6 +9,8 @@ import {MongooseModule} from "@nestjs/mongoose";
   providers: [PagesService],
   imports: [
     MongooseModule.forFeature([{ name: Pages.name, schema: PagesSchema }]),
-  ]
+
+  ],
+    exports: [PagesService]
 })
 export class PagesModule {}

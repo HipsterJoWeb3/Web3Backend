@@ -1,5 +1,6 @@
-import {Controller, Post, Body, Get, Param} from '@nestjs/common';
+import {Controller, Post, Body, Get, Param, UsePipes, Query} from '@nestjs/common';
 import {TagsService} from "./tags.service";
+import {ValidationPipe} from "../pipes/validation.pipe";
 
 export interface CreateTagDto {
     value: string
@@ -11,6 +12,7 @@ export class TagsController {
     constructor(private tagsService : TagsService) {}
 
     @Post()
+    @UsePipes(ValidationPipe)
     create(@Body() tag: CreateTagDto) {
         return this.tagsService.create(tag.value)
     }
@@ -20,6 +22,10 @@ export class TagsController {
         return this.tagsService.getTagsById(id)
     }
 
+    @Get()
+    getPopularTags(@Query('limit') limit: number) {
+        return this.tagsService.getPopularTags(limit)
+    }
 
 
 }

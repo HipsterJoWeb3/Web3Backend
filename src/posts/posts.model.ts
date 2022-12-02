@@ -17,8 +17,8 @@ export class Posts {
     @Prop({ required: true, type: String })
     description: string;
 
-    @Prop({ required: true, type: String })
-    text: string;
+    @Prop({ required: true, type: Object })
+    text: object;
 
     @Prop({ type: String })
     imageUrl: string;

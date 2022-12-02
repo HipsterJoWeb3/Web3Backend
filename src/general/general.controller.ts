@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Patch, Post} from '@nestjs/common';
+import {Body, Controller, Get, Param, Patch, Post, Query} from '@nestjs/common';
 import {GeneralService} from "./general.service";
 import mongoose from "mongoose";
 
@@ -9,10 +9,23 @@ export interface CreateGeneralDto {
         value: string;
         url: string;
     }];
-    pagesOrder: [{
-        page: mongoose.Schema.Types.ObjectId;
-        index: number;
-    }];
+    description: string;
+    keywords: string[];
+    animationLinks: [{
+        value: string;
+        url: string;
+    }]
+    someInformation: [{
+        title: string;
+        subtitle: string;
+        imageUrl: string;
+        hidden: boolean;
+    }]
+    animationText: [{
+        text: string;
+        duration: number;
+        hidden: boolean;
+    }]
 }
 
 @Controller('general')
@@ -33,4 +46,11 @@ export class GeneralController {
     update(@Body() dto: CreateGeneralDto) {
         return this.generalService.update(dto);
     }
+
+    @Get('/fetchUrl')
+    fetchUrl(@Query('url') url: string) {
+        return this.generalService.fetchUrl(url);
+    }
+
+
 }

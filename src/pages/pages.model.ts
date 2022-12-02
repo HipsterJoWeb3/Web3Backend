@@ -14,8 +14,8 @@ export class Pages {
     @Prop({ type: String, required: true })
     description: string;
 
-    @Prop({ type: String, required: true })
-    content: string;
+    @Prop({ type: Object, required: true })
+    content: object;
 
     @Prop({type: String, required: true})
     route: string;

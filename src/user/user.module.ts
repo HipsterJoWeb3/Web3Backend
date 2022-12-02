@@ -6,7 +6,7 @@ import {User, UserSchema} from "./user.model";
 import {Roles, RolesSchema} from "../roles/roles.model";
 import {RolesModule} from "../roles/roles.module";
 import {AuthModule} from "../auth/auth.module";
-import {JwtModule} from "@nestjs/jwt";
+import {PostsModule} from "../posts/posts.module";
 
 @Module({
   controllers: [UserController],
@@ -18,6 +18,7 @@ import {JwtModule} from "@nestjs/jwt";
       ]),
       RolesModule,
       forwardRef(() => AuthModule),
+      forwardRef(() => PostsModule)
   ],
   exports: [UserService]
 })

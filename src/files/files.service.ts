@@ -35,12 +35,12 @@ export class FilesService {
     async createPostImage(image: any): Promise<string> {
         try {
             const fileName = `${uuid.v4()}.${image.mimetype.split('/')[1]}`;
-            const filePath = path.resolve(__dirname, '..', 'static', 'posts');
+            const filePath = path.resolve(__dirname, '..', 'static', 'postsImage');
             if (!fs.existsSync(filePath)) {
                 fs.mkdirSync(filePath, {recursive: true})
             }
             fs.writeFileSync(path.join(filePath, fileName), image.buffer);
-            return `${process.env.HOST_URL}:${process.env.PORT}/posts/${fileName}`;
+            return `${process.env.HOST_URL}:${process.env.PORT}/postsImage/${fileName}`;
         } catch (e) {
             throw new HttpException('File error', HttpStatus.INTERNAL_SERVER_ERROR)
         }

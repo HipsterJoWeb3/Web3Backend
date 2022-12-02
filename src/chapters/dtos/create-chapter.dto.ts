@@ -11,4 +11,7 @@ export class CreateChapterDto {
     @IsNotEmpty({message: 'Must not be empty'})
     description: string;
     hidden: boolean;
+    count?: number;
+    showPopular?: boolean;
+    showRecent?: boolean;
 }

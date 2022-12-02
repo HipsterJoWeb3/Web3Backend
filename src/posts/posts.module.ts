@@ -10,6 +10,7 @@ import {UserModule} from "../user/user.module";
 import {TagsModule} from "../tags/tags.module";
 import {ChaptersModule} from "../chapters/chapters.module";
 import {Chapter, ChapterSchema} from "../chapters/chapters.model";
+import {JwtModule} from "@nestjs/jwt";
 
 
 @Module({
@@ -26,6 +27,11 @@ import {Chapter, ChapterSchema} from "../chapters/chapters.model";
     ChaptersModule,
     forwardRef(() => TagsModule),
     forwardRef(() => UserModule),
+    forwardRef(() => JwtModule),
+    JwtModule.register({
+      secret: process.env.SECRET_KEY || 'secretKey',
+      signOptions: {expiresIn: '24h'}
+    })
   ],
   exports: [PostsService]
 })

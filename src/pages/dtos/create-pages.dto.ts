@@ -13,6 +13,6 @@ export class CreatePagesDto {
     @IsString({message: 'Must be a string'})
     readonly route: string;
 
-    @MinLength(20, {message: 'Must be at least 20 characters'})
-    readonly content: string;
+
+    readonly content: object;
 }

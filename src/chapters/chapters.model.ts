@@ -14,6 +14,15 @@ export class Chapter {
 
     @Prop({type: Boolean, default: false})
     hidden: boolean;
+
+    @Prop({type: Number, default: 0})
+    count: number;
+
+    @Prop({type: Boolean, default: false})
+    showPopular: boolean;
+
+    @Prop({type: Boolean, default: false})
+    showRecent: boolean;
 }
 
 export const ChapterSchema = SchemaFactory.createForClass(Chapter);

@@ -25,4 +25,36 @@ export class ChaptersService {
     async getByValue(value: string) {
         return this.chapterModel.findOne({value}).exec();
     }
+
+    async getById(id: string) {
+        return this.chapterModel.findById(id).exec();
+    }
+
+    async update(id: string, dto: CreateChapterDto) {
+
+        const chapter = await this.chapterModel.findById(id).exec();
+        if(!chapter) {
+            throw new HttpException('Chapter is not found', HttpStatus.NOT_FOUND);
+        }
+        chapter.value = dto.value;
+        chapter.description = dto.description;
+        chapter.hidden = dto.hidden;
+        chapter.count = dto.count;
+        chapter.showPopular = dto.showPopular;
+        chapter.showRecent = dto.showRecent;
+        return chapter.save();
+    }
+
+    async hidden(id: string, hidden: boolean) {
+        const chapter = await this.chapterModel.findById(id).exec();
+        if(!chapter) {
+            throw new HttpException('Chapter is not found', HttpStatus.NOT_FOUND);
+        }
+        chapter.hidden = hidden;
+        return chapter.save();
+    }
+
+    async delete(id: string) {
+        return this.chapterModel.findByIdAndDelete(id).exec();
+    }
 }

@@ -28,13 +28,13 @@ export class RolesGuard implements CanActivate {
             const bearer = authHeader[0];
             const token = authHeader[1];
 
+
             if(bearer !== 'Bearer' || !token) {
                 throw new HttpException('Not auth', 401);
             }
 
             const user = this.jwtService.verify(token);
-            console.log(requiredRoles);
-            console.log(user.roles.some(role =>  requiredRoles.includes(role.value)));
+
             req.user = user;
 
             if(!user.roles.some(role => requiredRoles.includes(role.value))) throw new HttpException({message: 'Denied access'}, HttpStatus.FORBIDDEN);

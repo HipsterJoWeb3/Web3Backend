@@ -1,6 +1,7 @@
 // @ts-ignore
 import {IsNotEmpty, IsString, MinLength} from "class-validator";
 
+
 export class CreatePostDto {
     @IsString({message: 'Must be a string'})
     @IsNotEmpty({message: 'Must not be empty'})
@@ -10,9 +11,8 @@ export class CreatePostDto {
     @IsNotEmpty({message: 'Must not be empty'})
     readonly description: string;
 
-    @IsString({message: 'Must be a string'})
-    @MinLength(20, {message: 'Must be at least 20 characters'})
-    readonly text: string;
+
+    readonly text: object;
 
     readonly imageUrl: string;
 

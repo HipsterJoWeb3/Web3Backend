@@ -15,6 +15,7 @@ export class RolesService {
 
     async getByValue(value: string) {
         const role = await this.rolesModel.findOne({value}).exec();
+
         if(!role) throw new HttpException('Role not found', HttpStatus.NOT_FOUND);
         return role;
     }

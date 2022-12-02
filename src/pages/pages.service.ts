@@ -25,7 +25,28 @@ export class PagesService {
         return page;
     }
 
+    async getPageById(id) {
+
+        const page = await this.pagesModel.findById(id).exec();
+        if(!page) throw new HttpException('Page not found', HttpStatus.NOT_FOUND);
+        return page;
+    }
+
+    async update(id: string, dto: CreatePagesDto) {
+        const page = await this.pagesModel.findById(id).exec();
+        if(!page) throw new HttpException('Page not found', HttpStatus.NOT_FOUND);
+        return this.pagesModel.findByIdAndUpdate(id, dto, {new: true}).exec();
+    }
+
     async delete(id: string) {
         return this.pagesModel.findByIdAndDelete(id).exec();
+    }
+
+
+    async hidden(id: string, hidden: boolean) {
+        const page = await this.pagesModel.findById(id).exec();
+        if(!page) throw new HttpException('Page not found', HttpStatus.NOT_FOUND);
+        page.hidden = hidden;
+        return page.save();
     }
 }

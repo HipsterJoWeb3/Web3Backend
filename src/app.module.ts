@@ -14,6 +14,7 @@ import { TagsModule } from './tags/tags.module';
 import { ChaptersModule } from './chapters/chapters.module';
 import { GeneralModule } from './general/general.module';
 import { PagesModule } from './pages/pages.module';
+import {JwtModule} from "@nestjs/jwt";
 
 
 @Module({
@@ -26,7 +27,11 @@ import { PagesModule } from './pages/pages.module';
         ServeStaticModule.forRoot({
             rootPath: path.resolve(__dirname, 'static')
         }),
-        MongooseModule.forRoot(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.kdc6ywv.mongodb.net/web3_0?retryWrites=true&w=majority`),
+        JwtModule.register({
+            secret: process.env.SECRET_KEY || 'secretKey',
+            signOptions: {expiresIn: '12d'}
+        }),
+        MongooseModule.forRoot(`mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.2jrebig.mongodb.net/web3?retryWrites=true&w=majority`),
         UserModule,
         AuthModule,
         FilesModule,

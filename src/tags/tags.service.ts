@@ -52,8 +52,11 @@ export class TagsService {
         return [...tagsToReturn.map(item => item._id), ...createdTags]// return all tags
     }
 
-    getTagsByValue(tags: string[]) {
-        console.log(tags)
+    async getTagsByValue(tags: string[]) {
         return this.tagsModel.find({value: {$in: tags}}).exec();
+    }
+
+    async getPopularTags(limit: number) {
+        return this.tagsModel.find().sort({views: -1}).limit(limit).exec();
     }
 }
