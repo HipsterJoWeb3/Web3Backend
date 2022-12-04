@@ -26,7 +26,7 @@ export class FilesService {
                 fs.mkdirSync(filePath, {recursive: true})
             }
             fs.writeFileSync(path.join(filePath, fileName), image.buffer);
-            return `${process.env.HOST_URL}:${process.env.PORT}/avatars/${fileName}`;
+            return `${process.env.HOST_URL}/avatars/${fileName}`;
         } catch (e) {
             throw new HttpException('File error', HttpStatus.INTERNAL_SERVER_ERROR)
         }
@@ -40,7 +40,7 @@ export class FilesService {
                 fs.mkdirSync(filePath, {recursive: true})
             }
             fs.writeFileSync(path.join(filePath, fileName), image.buffer);
-            return `${process.env.HOST_URL}:${process.env.PORT}/postsImage/${fileName}`;
+            return `${process.env.HOST_URL}/postsImage/${fileName}`;
         } catch (e) {
             throw new HttpException('File error', HttpStatus.INTERNAL_SERVER_ERROR)
         }
